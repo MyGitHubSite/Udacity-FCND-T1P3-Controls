@@ -30,7 +30,7 @@ Within QuadControl::BodyRateControl:
 
 **_(2) Implement roll pitch control in C++._**  
 
-I followed the lecture notes to update the formulas here trying to keep the same notation.  The parameter _kpBank_ was found through brute force by running the simulator and tweaking the parameter on the fly unitl the scenarios that were dependent on it passed.
+I followed the lecture notes to update the formulas here trying to keep the same notation.  The parameter _kpBank_ was found through brute force by running the simulator and tweaking the parameter on the fly until the scenarios that were dependent on it passed.
 
 Within QuadControl::RollPitchControl
  
@@ -64,7 +64,7 @@ Within QuadControl::RollPitchControl
 
 **_(3) Implement altitude controller in C++._**
 
-I followed the lecture notes to update the formulas here trying to keep the same notation.  The parameters _kpPosZ, kpVelZ, and kiPosZ, were found through brute force by running the simulator and tweaking the parameters on the fly unitl the scenarios that were dependent on them passed.
+I followed the lecture notes to update the formulas here trying to keep the same notation.  The parameters _kpPosZ, kpVelZ, and kiPosZ, were found through brute force by running the simulator and tweaking the parameters on the fly until the scenarios that were dependent on them passed.
 
 Within QuadControl::AltitudeControl:
  
@@ -89,7 +89,7 @@ Within QuadControl::AltitudeControl:
 
 **_(4) Implement lateral position control in C++._**  
 
-I followed the lecture notes to update the formulas here.  The parameters _kpPosXY and kpVelXY  were found through brute force by running the simulator and tweaking the parameters on the fly unitl the scenarios that were dependent on them passed.
+I followed the lecture notes to update the formulas here.  The parameters _kpPosXY and kpVelXY  were found through brute force by running the simulator and tweaking the parameters on the fly until the scenarios that were dependent on them passed.
 
 Within QuadControl::LateralPositionControl:
 
@@ -105,7 +105,7 @@ Within QuadControl::LateralPositionControl:
     
 **_(5) Implement yaw control in C++._**  
 
-I followed the instructions to update the formulas here.  The parameter _kpYaw was found through brute force by running the simulator and tweaking the parameters on the fly unitl the scenarios that were dependent it them passed.
+I followed the instructions to update the formulas here.  The parameter _kpYaw was found through brute force by running the simulator and tweaking the parameters on the fly until the scenarios that were dependent it them passed.
 
 Within QuadControl::YawControl
  
