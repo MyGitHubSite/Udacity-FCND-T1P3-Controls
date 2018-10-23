@@ -2,7 +2,7 @@
 # Control of a 3D Quadrotor  
   
   
-  ![](./animations/quad.jpg)
+  
   
   
 ## Project Requirements:  
@@ -16,11 +16,11 @@ You're reading it!
 
 The first thing I did was to test if the mass was correct by running the simulator through a basic rotor thrust command against gravity to see if the quadrotor would hover.  It fell to the ground because the mass parameter was too low.  I tweaked the mass until I got the quadrotor to approximately hover.  I rounded the mass to 0.50 and kept that as my mass parameter for all the scenarios.
 
-All my chosen parameters are in the file QuadControlParams.txt and they are also show at the end of the write up.
+All my chosen parameters are in the file QuadControlParams.txt and they are also shown at the end of the write up.  I tried to follow the recommended guidelines for the parameter selections but to get the final parameters I mostly had to run the simulator and change them on the fly until the scenarios passed.  In a few cases the selections were iterative, meaning sometimes I got a scenario to pass but it caused another to fail.  So, in a few cases I had to go back and forth between scenarios and parameters unti everything worked. 
 
 **_(1) Implement body rate control in C++._**  
 
-I followed the lecture notes to update the formulas here.  THe parameter kpPQR I 
+I followed the lecture notes to update the formulas here.  The parameter _kpPQR_ was found through brute force by running the simulator and tweaking the parameter on the fly unitl the scenarios that were dependent on it passed.
 
 Within QuadControl::BodyRateControl:
     
@@ -30,6 +30,8 @@ Within QuadControl::BodyRateControl:
     momentCmd = Inertia * kpPQR * (pqrCmd - pqr);  
 
 **_(2) Implement roll pitch control in C++._**  
+
+I followed the lecture notes to update the formulas here trying to keep the same notation.  The parameter _kpBank_ was found through brute force by running the simulator and tweaking the parameter on the fly unitl the scenarios that were dependent on it passed.
 
 Within QuadControl::RollPitchControl
  
@@ -60,6 +62,8 @@ Within QuadControl::RollPitchControl
 
 **_(3) Implement altitude controller in C++._**
 
+I followed the lecture notes to update the formulas here trying to keep the same notation.  The parameters _kpPosZ, kpVelZ, kiPosZ, were found through brute force by running the simulator and tweaking the parameters on the fly unitl the scenarios that were dependent on them passed.
+
 Within QuadControl::AltitudeControl:
  
     float g = 9.81f;																	// gravitational force m/s^2
@@ -83,6 +87,8 @@ Within QuadControl::AltitudeControl:
 
 **_(4) Implement lateral position control in C++._**  
 
+I followed the lecture notes to update the formulas here.  The parameters _kpPosXY, kpVelXY  were found through brute force by running the simulator and tweaking the parameters on the fly unitl the scenarios that were dependent on them passed.
+
 Within QuadControl::LateralPositionControl:
 
     V3F pos_error = posCmd - pos;
@@ -97,6 +103,8 @@ Within QuadControl::LateralPositionControl:
     
 **_(5) Implement yaw control in C++._**  
 
+I followed the instructions to update the formulas here.  The parameter _kpYaw was found through brute force by running the simulator and tweaking the parameters on the fly unitl the scenarios that were dependent it them passed.
+
 Within QuadControl::YawControl
  
     float b = 2 * M_PI;
@@ -108,6 +116,8 @@ Within QuadControl::YawControl
     yawRateCmd = (yaw_error * kpYaw);
 
 **_(6) Implement calculating the motor commands given commanded thrust and moments in C++._**  
+
+This one was a little tricky.  I had to look through my notes from the lectures carefully and read through some of the recommended papers to come up with the formulas.
 
 Within QuadControl::GenerateMotorCommands
 
