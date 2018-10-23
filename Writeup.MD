@@ -17,7 +17,12 @@ kpYaw = 4
 kpPQR = 40, 40, 10  
 
 
-
+VehicleCommand QuadControl::GenerateMotorCommands(float collThrustCmd, V3F momentCmd)
+{
+  // Convert a desired 3-axis moment and collective thrust command to 
+  //   individual motor thrust commands
+  
+  
 float new_mass = mass * 1.25;
   // cmd.desiredThrustsN[0] = new_mass * 9.81f / 4.f;                // * 1.2114; // front left
   // cmd.desiredThrustsN[1] = new_mass * 9.81f / 4.f;                // * 1.2092; // front right
@@ -45,7 +50,9 @@ float new_mass = mass * 1.25;
   cmd.desiredThrustsN[3] = CONSTRAIN(F4, minMotorThrust, maxMotorThrust);
   
   
-  
+  V3F QuadControl::BodyRateControl(V3F pqrCmd, V3F pqr)
+{
+  // Calculate a desired 3-axis moment given a desired and current body rate
   
     V3F Inertia = V3F(Ixx, Iyy, Izz);
 
@@ -53,7 +60,13 @@ float new_mass = mass * 1.25;
   momentCmd = Inertia * kpPQR * (pqrCmd - pqr);
   
   
-  
+  V3F QuadControl::RollPitchControl(V3F accelCmd, Quaternion<float> attitude, float collThrustCmd)
+{
+  // Calculate a desired pitch and roll angle rates based on a desired global
+  //   lateral acceleration, the current attitude of the quad, and desired
+  //   collective thrust command
+ 
+ 
   
     // get inputs to roll-pitch controller
 
@@ -84,7 +97,13 @@ float new_mass = mass * 1.25;
   pqrCmd.y = 1.0 / R(2,2) * (R(1,1) * b_c_x_dot - R(0,1) * b_c_y_dot);
   
   
-  
+  float QuadControl::AltitudeControl(float posZCmd, float velZCmd, float posZ, float velZ, Quaternion<float> attitude, float accelZCmd, float dt)
+{
+  // Calculate desired quad thrust based on altitude setpoint, actual altitude,
+  //   vertical velocity setpoint, actual vertical velocity, and a vertical 
+  //   acceleration feed-forward command
+ 
+ 
     float g = 9.81f;																	// gravitational force m/s^2
   float z = posZ;															// z position
   float z_dot = velZ;														// z velocity
@@ -105,7 +124,10 @@ float new_mass = mass * 1.25;
   thrust = (g - z_dot_dot) * mass / R(2,2);   // output to Roll-Pitch controller
   
   
-  
+  V3F QuadControl::LateralPositionControl(V3F posCmd, V3F velCmd, V3F pos, V3F vel, V3F accelCmdFF)
+{
+  // Calculate a desired horizontal acceleration based on 
+  //  desired lateral position/velocity/acceleration and current pose
   
     V3F pos_error = posCmd - pos;
   V3F vel_error = velCmd - vel;
@@ -117,7 +139,9 @@ float new_mass = mass * 1.25;
   accelCmd.x = CONSTRAIN(accelCmd.x, -maxAccelXY, maxAccelXY);
   accelCmd.y = CONSTRAIN(accelCmd.y, -maxAccelXY, maxAccelXY);
   
-  
+  float QuadControl::YawControl(float yawCmd, float yaw)
+{
+  // Calculate a desired yaw rate to control yaw to yawCmd
   
     float b = 2 * M_PI;
   yaw = fmodf(yaw, b);
