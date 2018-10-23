@@ -1,8 +1,7 @@
 
 # Control of a 3D Quadrotor  
   
-  ![3D Control Architecture](.\animations\3D Control Architexture.png)
-  
+  ![3D Control Architecture](./animations/3D%20Control%20Architexture.png)
   
   
 ## Project Requirements:  
