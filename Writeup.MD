@@ -1,49 +1,34 @@
 
 # Control of a 3D Quadrotor
 
-### Convert a desired 3-axis moment and collective thrust command to individual motor thrust commands
+### Project Requirements:  
 
+A. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. 
 
-**QuadControl.cpp**
+![You're reading it! !](Writeup.MD)  
+---
+B. Implement Controller  
 
-**GenerateMotorCommands**
+Implement body rate control in C++.  
 
-      float l = L / M_SQRT2;					   // perpendicular length to the axes
+    Calculate a desired 3-axis moment given a desired and current body rate
   
-      float F = collThrustCmd;
-      float Fx = momentCmd.x / l;
-      float Fy = momentCmd.y / l;
-      float Fz = momentCmd.z / kappa;
-
-      float F1 = (F + Fx + Fy - Fz) / 4;
-      float F2 = (F - Fx + Fy + Fz) / 4;
-      float F3 = (F + Fx - Fy + Fz) / 4;
-      float F4 = (F - Fx - Fy - Fz) / 4;
-      float total_thrust = F1 + F2 + F3 + F4;
-
-      assert(total_thrust = collThrustCmd);
+    BodyRateControl
+  
     
-      cmd.desiredThrustsN[0] = CONSTRAIN(F1, minMotorThrust, maxMotorThrust);
-      cmd.desiredThrustsN[1] = CONSTRAIN(F2, minMotorThrust, maxMotorThrust);
-      cmd.desiredThrustsN[2] = CONSTRAIN(F3, minMotorThrust, maxMotorThrust);
-      cmd.desiredThrustsN[3] = CONSTRAIN(F4, minMotorThrust, maxMotorThrust);
-
-**Calculate a desired 3-axis moment given a desired and current body rate**
-  
-**BodyRateControl**
-  
     V3F Inertia = V3F(Ixx, Iyy, Izz);
 
     // output to Quadcopter
-    momentCmd = Inertia * kpPQR * (pqrCmd - pqr);
-  
+    momentCmd = Inertia * kpPQR * (pqrCmd - pqr);  
+
+
+Implement roll pitch control in C++.  
+
 Calculate a desired pitch and roll angle rates based on a desired global lateral acceleration, the current attitude of the quad, and desired collective thrust command
  
-**RollPitchControl**
+    RollPitchControl
  
-    // get inputs to roll-pitch controller
-    // from altitude controller  
-    float collAccelCmd = -collThrustCmd / mass;     // convert thrust u1 (N) to m/s^2
+    get inputs to roll-pitch controller from altitude controller convert thrust u1 (N) to m/s^2
 
     // from lateral controller
     float x_c_dot_dot = accelCmd.x;
@@ -67,7 +52,10 @@ Calculate a desired pitch and roll angle rates based on a desired global lateral
     // convert coordinate frames
     pqrCmd.x = 1.0 / R(2,2) * (R(1,0) * b_c_x_dot - R(0,0) * b_c_y_dot);
     pqrCmd.y = 1.0 / R(2,2) * (R(1,1) * b_c_x_dot - R(0,1) * b_c_y_dot);
-  
+
+
+Implement altitude controller in C++.  
+
 Calculate desired quad thrust based on altitude setpoint, actual altitude, vertical velocity setpoint, actual vertical velocity, and a vertical acceleration feed-forward command.  
   
 AltitudeControl
@@ -91,6 +79,10 @@ AltitudeControl
 
     thrust = (g - z_dot_dot) * mass / R(2,2);   // output to Roll-Pitch controller
   
+
+
+Implement lateral position control in C++.  
+
 Calculate a desired horizontal acceleration based on desired lateral position/velocity/acceleration and current pose.  
 
 LateralPositionControl
@@ -104,7 +96,10 @@ LateralPositionControl
     // outputs to Roll-Pitch controller
     accelCmd.x = CONSTRAIN(accelCmd.x, -maxAccelXY, maxAccelXY);
     accelCmd.y = CONSTRAIN(accelCmd.y, -maxAccelXY, maxAccelXY);
-  
+    
+    
+Implement yaw control in C++.  
+
 Calculate a desired yaw rate to control yaw to yawCmd
 
 YawControl
@@ -116,9 +111,39 @@ YawControl
 
     // output to Body Rate controller
     yawRateCmd = (yaw_error * kpYaw);
+    
 
+Implement calculating the motor commands given commanded thrust and moments in C++.  
 
-**QuadControlParams.txt**  
+### Convert a desired 3-axis moment and collective thrust command to individual motor thrust commands
+
+    QuadControl.cpp**
+
+    GenerateMotorCommands**
+
+    float l = L / M_SQRT2;					   // perpendicular length to the axes
+  
+    float F = collThrustCmd;
+    float Fx = momentCmd.x / l;
+    float Fy = momentCmd.y / l;
+    float Fz = momentCmd.z / kappa;
+
+    float F1 = (F + Fx + Fy - Fz) / 4;
+    float F2 = (F - Fx + Fy + Fz) / 4;
+    float F3 = (F + Fx - Fy + Fz) / 4;
+    float F4 = (F - Fx - Fy - Fz) / 4;
+    float total_thrust = F1 + F2 + F3 + F4;
+
+    assert(total_thrust = collThrustCmd);
+    
+    cmd.desiredThrustsN[0] = CONSTRAIN(F1, minMotorThrust, maxMotorThrust);
+    cmd.desiredThrustsN[1] = CONSTRAIN(F2, minMotorThrust, maxMotorThrust);
+    cmd.desiredThrustsN[2] = CONSTRAIN(F3, minMotorThrust, maxMotorThrust);
+    cmd.desiredThrustsN[3] = CONSTRAIN(F4, minMotorThrust, maxMotorThrust);
+
+---
+
+Parameters modified in *QuadControlParams.txt*  
 
     # Physical properties  
     Mass = 0.5
@@ -138,4 +163,12 @@ YawControl
 
     # Angle rate gains
     kpPQR = 40, 40, 10  
+
+---
+### C. Flight Evaluation  
+
+Your C++ controller is successfully able to fly the provided test trajectory and visually passes inspection of the scenarios leading up to the test trajectory.  
+
+It does!
+
 
