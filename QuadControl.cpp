@@ -7,7 +7,7 @@
 #include "Trajectory.h"
 #include "BaseController.h"
 #include "Math/Mat3x3F.h"
-#include <iostream>
+
 #include "Simulation/QuadDynamics.h"
 
 //#include <string>
