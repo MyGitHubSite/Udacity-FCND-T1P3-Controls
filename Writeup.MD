@@ -12,9 +12,7 @@ You're reading it!
 ---
 ### B. Implement Controller
 
-**Implement body rate control in C++.**  
-
-Calculate a desired 3-axis moment given a desired and current body rate
+**_Implement body rate control in C++._**  
   
 Within QuadControl::BodyRateControl:
     
