@@ -35,17 +35,20 @@ I followed the lecture notes to update the formulas here trying to keep the same
 
 Within QuadControl::RollPitchControl
  
-    // Get inputs to roll-pitch controller from altitude controller convert thrust u1 (N) to m/s^2
+    // Get inputs to roll-pitch controller
+    // from altitude controller  
+    float collAccelCmd = -collThrustCmd / mass;           // convert thrust u1 (N) to m/s^2
+    
     // from lateral controller
     float x_c_dot_dot = accelCmd.x;
     float y_c_dot_dot = accelCmd.y;
 
-    // from quadcopter
+    // from quadrotor
     float b_x = R(0,2);       // roll angle phi
     float b_y = R(1,2);       // roll angle theta
     // float b_z = R(2, 2);   // roll angle psi   note calculated in yaw controller
 
-    // set target p, q angles   note r is calculated by yaw controller
+    // set target p, q angles   - note r is calculated by yaw controller
     float b_x_target = atan(x_c_dot_dot / collAccelCmd);   // p angle
     float b_y_target = atan(y_c_dot_dot / collAccelCmd);   // q angle
   
