@@ -1,6 +1,8 @@
 
 # Control of a 3D Quadrotor
 
+---
+
 ## Project Requirements:  
 
 ### A. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf.  
