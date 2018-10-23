@@ -3,11 +3,12 @@
 
 ## Project Requirements:  
 
-#### A. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf.
+### A. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf.  
 
 You're reading it!
+
 ---
-#### B. Implement Controller
+### B. Implement Controller
 
 **Implement body rate control in C++.**  
 
