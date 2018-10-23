@@ -27,12 +27,12 @@ Within QuadControl::BodyRateControl:
 
 Within QuadControl::RollPitchControl
  
-    //Get inputs to roll-pitch controller from altitude controller convert thrust u1 (N) to m/s^2
+    // Get inputs to roll-pitch controller from altitude controller convert thrust u1 (N) to m/s^2
     // from lateral controller
     float x_c_dot_dot = accelCmd.x;
     float y_c_dot_dot = accelCmd.y;
 
-    // from quad
+    // from quadcopter
     float b_x = R(0,2);       // roll angle phi
     float b_y = R(1,2);       // roll angle theta
     // float b_z = R(2, 2);   // roll angle psi   note calculated in yaw controller
@@ -152,7 +152,7 @@ Parameters modified in *QuadControlParams.txt*
 ---
 ### C. Flight Evaluation  
 
-Your C++ controller is successfully able to fly the provided test trajectory and visually passes inspection of the scenarios leading up to the test trajectory.  
+**_Your C++ controller is successfully able to fly the provided test trajectory and visually passes inspection of the scenarios leading up to the test trajectory._**  
 
 It does!
 
