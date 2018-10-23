@@ -19,7 +19,7 @@ All my chosen parameters are in the file QuadControlParams.txt and they are also
 
 **_(1) Implement body rate control in C++._**  
 
-I followed the lecture notes to update the formulas here.  The parameter _kpPQR_ was found through brute force by running the simulator and tweaking the parameter on the fly unitl the scenarios that were dependent on it passed.
+I followed the lecture notes to update the formulas here.  The parameter _kpPQR_ was found through brute force by running the simulator and tweaking the parameter on the fly until the scenarios that were dependent on it passed.
 
 Within QuadControl::BodyRateControl:
     
