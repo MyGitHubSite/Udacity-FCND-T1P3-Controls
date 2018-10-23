@@ -1,35 +1,32 @@
 
 # Control of a 3D Quadrotor
 
-### Project Requirements:  
+## Project Requirements:  
 
-A. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. 
+####A. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf.
 
-![You're reading it! !](Writeup.MD)  
+You're reading it!
 ---
-B. Implement Controller  
+####B. Implement Controller
 
-Implement body rate control in C++.  
+**Implement body rate control in C++.**  
 
-    Calculate a desired 3-axis moment given a desired and current body rate
+Calculate a desired 3-axis moment given a desired and current body rate
   
-    BodyRateControl
-  
+Within QuadControl::BodyRateControl:
     
     V3F Inertia = V3F(Ixx, Iyy, Izz);
 
     // output to Quadcopter
     momentCmd = Inertia * kpPQR * (pqrCmd - pqr);  
 
-
-Implement roll pitch control in C++.  
+**Implement roll pitch control in C++.**  
 
 Calculate a desired pitch and roll angle rates based on a desired global lateral acceleration, the current attitude of the quad, and desired collective thrust command
  
-    RollPitchControl
+Within QuadControl::RollPitchControl
  
-    get inputs to roll-pitch controller from altitude controller convert thrust u1 (N) to m/s^2
-
+    //Get inputs to roll-pitch controller from altitude controller convert thrust u1 (N) to m/s^2
     // from lateral controller
     float x_c_dot_dot = accelCmd.x;
     float y_c_dot_dot = accelCmd.y;
@@ -54,11 +51,11 @@ Calculate a desired pitch and roll angle rates based on a desired global lateral
     pqrCmd.y = 1.0 / R(2,2) * (R(1,1) * b_c_x_dot - R(0,1) * b_c_y_dot);
 
 
-Implement altitude controller in C++.  
+**Implement altitude controller in C++.**
 
 Calculate desired quad thrust based on altitude setpoint, actual altitude, vertical velocity setpoint, actual vertical velocity, and a vertical acceleration feed-forward command.  
   
-AltitudeControl
+Within QuadControl::AltitudeControl:
  
     float g = 9.81f;																	// gravitational force m/s^2
     float z = posZ;															// z position
@@ -78,14 +75,12 @@ AltitudeControl
     float z_dot_dot = P + I + D;
 
     thrust = (g - z_dot_dot) * mass / R(2,2);   // output to Roll-Pitch controller
-  
 
-
-Implement lateral position control in C++.  
+**Implement lateral position control in C++.**  
 
 Calculate a desired horizontal acceleration based on desired lateral position/velocity/acceleration and current pose.  
 
-LateralPositionControl
+Within QuadControl::LateralPositionControl:
 
     V3F pos_error = posCmd - pos;
     V3F vel_error = velCmd - vel;
@@ -97,12 +92,11 @@ LateralPositionControl
     accelCmd.x = CONSTRAIN(accelCmd.x, -maxAccelXY, maxAccelXY);
     accelCmd.y = CONSTRAIN(accelCmd.y, -maxAccelXY, maxAccelXY);
     
-    
-Implement yaw control in C++.  
+**Implement yaw control in C++.**  
 
 Calculate a desired yaw rate to control yaw to yawCmd
 
-YawControl
+Within QuadControl::YawControl
  
     float b = 2 * M_PI;
     yaw = fmodf(yaw, b);
@@ -111,15 +105,12 @@ YawControl
 
     // output to Body Rate controller
     yawRateCmd = (yaw_error * kpYaw);
-    
 
-Implement calculating the motor commands given commanded thrust and moments in C++.  
+**Implement calculating the motor commands given commanded thrust and moments in C++.**  
 
-### Convert a desired 3-axis moment and collective thrust command to individual motor thrust commands
+Convert a desired 3-axis moment and collective thrust command to individual motor thrust commands
 
-    QuadControl.cpp**
-
-    GenerateMotorCommands**
+Within QuadControl::GenerateMotorCommands
 
     float l = L / M_SQRT2;					   // perpendicular length to the axes
   
