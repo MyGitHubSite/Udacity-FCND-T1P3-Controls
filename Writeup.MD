@@ -2,7 +2,7 @@
 # Control of a 3D Quadrotor  
   
   
-  ![](./animations/quad.jpg)
+  ![                     ](./animations/quad.jpg)
   
   
 ## Project Requirements:  
