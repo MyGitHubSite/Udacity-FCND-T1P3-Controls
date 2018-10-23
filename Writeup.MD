@@ -57,13 +57,13 @@ Within QuadControl::RollPitchControl
 Within QuadControl::AltitudeControl:
  
     float g = 9.81f;																	// gravitational force m/s^2
-    float z = posZ;															// z position
-    float z_dot = velZ;														// z velocity
-    float z_Cmd = posZCmd;													// z position command
+    float z = posZ;															      // z position
+    float z_dot = velZ;														    // z velocity
+    float z_Cmd = posZCmd;													  // z position command
     float z_dot_Cmd = CONSTRAIN(velZCmd, -maxAscentRate, maxDescentRate);     // z velocity command
-    float z_dot_dot_Cmd = accelZCmd;											// z acceleration command
+    float z_dot_dot_Cmd = accelZCmd;									// z acceleration command
     float z_error = z_Cmd - z;												// z position error
-    float z_dot_error = z_dot_Cmd - z_dot;									// z velocity error
+    float z_dot_error = z_dot_Cmd - z_dot;						// z velocity error
 
     integratedAltitudeError += z_error * KiPosZ * dt;
 
@@ -73,7 +73,7 @@ Within QuadControl::AltitudeControl:
 
     float z_dot_dot = P + I + D;
 
-    thrust = (g - z_dot_dot) * mass / R(2,2);   // output to Roll-Pitch controller
+    thrust = (g - z_dot_dot) * mass / R(2,2);         // output to Roll-Pitch controller
 
 **_(4) Implement lateral position control in C++._**  
 
@@ -105,7 +105,7 @@ Within QuadControl::YawControl
 
 Within QuadControl::GenerateMotorCommands
 
-    float l = L / M_SQRT2;					   // perpendicular length to the axes
+    float l = L / M_SQRT2;					                   // perpendicular length to the axes
   
     float F = collThrustCmd;
     float Fx = momentCmd.x / l;
