@@ -1,5 +1,5 @@
 
- 
+ QuadControlParams.txt
 # Position control gains
 kpPosXY = 40
 kpPosZ = 55
@@ -16,6 +16,7 @@ kpYaw = 4
 # Angle rate gains
 kpPQR = 40, 40, 10  
 
+QuadControl.cpp
 
 VehicleCommand QuadControl::GenerateMotorCommands(float collThrustCmd, V3F momentCmd)
 {
