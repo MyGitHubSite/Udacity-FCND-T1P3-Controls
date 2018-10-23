@@ -12,7 +12,7 @@ You're reading it!
 ---
 ### B. Implement Controller
 
-**_Implement body rate control in C++._**  
+**_(1) Implement body rate control in C++._**  
   
 Within QuadControl::BodyRateControl:
     
@@ -21,10 +21,8 @@ Within QuadControl::BodyRateControl:
     // output to Quadcopter
     momentCmd = Inertia * kpPQR * (pqrCmd - pqr);  
 
-**Implement roll pitch control in C++.**  
+**_(2) Implement roll pitch control in C++._**  
 
-Calculate a desired pitch and roll angle rates based on a desired global lateral acceleration, the current attitude of the quad, and desired collective thrust command
- 
 Within QuadControl::RollPitchControl
  
     //Get inputs to roll-pitch controller from altitude controller convert thrust u1 (N) to m/s^2
@@ -52,10 +50,8 @@ Within QuadControl::RollPitchControl
     pqrCmd.y = 1.0 / R(2,2) * (R(1,1) * b_c_x_dot - R(0,1) * b_c_y_dot);
 
 
-**Implement altitude controller in C++.**
+**_(3) Implement altitude controller in C++._**
 
-Calculate desired quad thrust based on altitude setpoint, actual altitude, vertical velocity setpoint, actual vertical velocity, and a vertical acceleration feed-forward command.  
-  
 Within QuadControl::AltitudeControl:
  
     float g = 9.81f;																	// gravitational force m/s^2
@@ -77,9 +73,7 @@ Within QuadControl::AltitudeControl:
 
     thrust = (g - z_dot_dot) * mass / R(2,2);   // output to Roll-Pitch controller
 
-**Implement lateral position control in C++.**  
-
-Calculate a desired horizontal acceleration based on desired lateral position/velocity/acceleration and current pose.  
+**_(4) Implement lateral position control in C++._**  
 
 Within QuadControl::LateralPositionControl:
 
@@ -93,9 +87,7 @@ Within QuadControl::LateralPositionControl:
     accelCmd.x = CONSTRAIN(accelCmd.x, -maxAccelXY, maxAccelXY);
     accelCmd.y = CONSTRAIN(accelCmd.y, -maxAccelXY, maxAccelXY);
     
-**Implement yaw control in C++.**  
-
-Calculate a desired yaw rate to control yaw to yawCmd
+**_(5) Implement yaw control in C++._**  
 
 Within QuadControl::YawControl
  
@@ -107,9 +99,7 @@ Within QuadControl::YawControl
     // output to Body Rate controller
     yawRateCmd = (yaw_error * kpYaw);
 
-**Implement calculating the motor commands given commanded thrust and moments in C++.**  
-
-Convert a desired 3-axis moment and collective thrust command to individual motor thrust commands
+**_(6) Implement calculating the motor commands given commanded thrust and moments in C++._**  
 
 Within QuadControl::GenerateMotorCommands
 
@@ -134,6 +124,7 @@ Within QuadControl::GenerateMotorCommands
     cmd.desiredThrustsN[3] = CONSTRAIN(F4, minMotorThrust, maxMotorThrust);
 
 ---
+**Notes:**
 
 Parameters modified in *QuadControlParams.txt*  
 
