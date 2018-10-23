@@ -16,7 +16,7 @@ You're reading it!
 
 The first thing I did was to test if the mass was correct by running the simulator through a basic rotor thrust command against gravity to see if the quadrotor would hover.  It fell to the ground because the mass parameter was too low.  I tweaked the mass until I got the quadrotor to approximately hover.  I rounded the mass to 0.50 and kept that as my mass parameter for all the scenarios.
 
-All my chosen parameters are in the file ![QuadControlParams.txt](.\QuadControlParams.txt) and they are also show at the end of the write up.
+All my chosen parameters are in the file QuadControlParams.txt and they are also show at the end of the write up.
 
 **_(1) Implement body rate control in C++._**  
 
