@@ -123,7 +123,7 @@ This one was a little tricky.  I had to look through my notes from the lectures 
 
 Within QuadControl::GenerateMotorCommands
 
-    float l = L / M_SQRT2;					                   // perpendicular length to the axes
+    float l = L / M_SQRT2;					    // perpendicular length to the axes
   
     float F = collThrustCmd;
     float Fx = momentCmd.x / l;
