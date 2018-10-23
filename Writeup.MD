@@ -62,7 +62,7 @@ Within QuadControl::RollPitchControl
 
 **_(3) Implement altitude controller in C++._**
 
-I followed the lecture notes to update the formulas here trying to keep the same notation.  The parameters _kpPosZ, kpVelZ, kiPosZ, were found through brute force by running the simulator and tweaking the parameters on the fly unitl the scenarios that were dependent on them passed.
+I followed the lecture notes to update the formulas here trying to keep the same notation.  The parameters _kpPosZ, kpVelZ, and kiPosZ, were found through brute force by running the simulator and tweaking the parameters on the fly unitl the scenarios that were dependent on them passed.
 
 Within QuadControl::AltitudeControl:
  
@@ -87,7 +87,7 @@ Within QuadControl::AltitudeControl:
 
 **_(4) Implement lateral position control in C++._**  
 
-I followed the lecture notes to update the formulas here.  The parameters _kpPosXY, kpVelXY  were found through brute force by running the simulator and tweaking the parameters on the fly unitl the scenarios that were dependent on them passed.
+I followed the lecture notes to update the formulas here.  The parameters _kpPosXY and kpVelXY  were found through brute force by running the simulator and tweaking the parameters on the fly unitl the scenarios that were dependent on them passed.
 
 Within QuadControl::LateralPositionControl:
 
